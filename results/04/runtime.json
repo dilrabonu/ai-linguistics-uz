@@ -1,0 +1,19 @@
+{
+  "steps_seconds": {
+    "0 setup": 0.1,
+    "1 data": 4.9,
+    "2 tokenizers": 27.6,
+    "3 audit": 10.4,
+    "4a wikipedia": 35.9,
+    "4b train BPE": 29.4,
+    "4c audit own": 6.3,
+    "5 morphology": 0.1,
+    "6 summary": 3.5
+  },
+  "total_seconds": 118.9,
+  "n_sentences": 1000,
+  "n_wiki_articles": 40000,
+  "platform": "win32",
+  "python": "3.11.15",
+  "cpu_count": 12
+}

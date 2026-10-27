@@ -1,0 +1,8 @@
+tokenizer,id,kind,status,vocab_size,scheme
+GPT-2,gpt2,pretrained,loaded,50257,bytelevel
+Qwen2.5,Qwen/Qwen2.5-0.5B,pretrained,loaded,151665,bytelevel
+XLM-R,xlm-roberta-base,pretrained,loaded,250002,sentencepiece
+mT5,google/mt5-small,pretrained,loaded,250100,sentencepiece
+ByT5,google/byt5-small,pretrained,loaded,384,bytes
+Llama 3.2,meta-llama/Llama-3.2-1B,gated,skipped: no HF_TOKEN,,
+Gemma 3,google/gemma-3-1b-pt,gated,skipped: no HF_TOKEN,,
