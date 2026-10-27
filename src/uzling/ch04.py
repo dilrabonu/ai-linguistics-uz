@@ -554,7 +554,7 @@ def plot_fertility(table):
     ax.legend(frameon=False, loc="upper left")
     fig.text(
         0.01,
-        -0.02,
+        -0.08,
         "Manba: FLORES-200, 1 000 ta parallel jumla. * — oʻzimiz oʻqitgan BPE tokenizatorlari.",
         fontsize=8,
         color="0.3",
@@ -563,7 +563,12 @@ def plot_fertility(table):
 
 
 def _label(row) -> str:
-    return row.tokenizer + ("*" if getattr(row, "kind", "") == "own" else "")
+    """Tick label: own tokenizers get a star; long names are wrapped (BPE-uz+en / 32k*)."""
+    name = row.tokenizer + ("*" if getattr(row, "kind", "") == "own" else "")
+    if name.startswith("BPE-"):
+        head, _, size = name.rpartition("-")
+        name = f"{head}\n{size}"
+    return name
 
 
 def plot_parity(table):
@@ -588,7 +593,8 @@ def plot_parity(table):
     for i, r in df.iterrows():
         ax.text(r.parity_ci_high + 0.03, i, uz_num(r.parity), va="center", fontsize=8)
     ax.axvline(1.0, color="0.2", linestyle="--", linewidth=1)
-    ax.text(1.0, len(df) - 0.4, " tenglik = 1,0", fontsize=8, color="0.2", va="bottom")
+    ax.set_ylim(-1.0, len(df) - 0.5)
+    ax.text(1.0, -0.75, " tenglik = 1,0", fontsize=8, color="0.2", va="center")
     ax.set_yticks(y, [_label(r) for r in df.itertuples()])
     ax.set_xlabel("Parity: oʻzbekcha tokenlar / inglizcha tokenlar (95% ishonch oraligʻi)")
     ax.set_title("Tillararo tenglik (parity)")
@@ -599,75 +605,80 @@ def plot_parity(table):
 
 
 def plot_token_split(adapters: dict[str, TokenizerAdapter], sentence: str, word: str):
-    """Coloured token chunks for ``sentence`` and ``word`` per tokenizer."""
+    """Coloured token chunks for ``sentence`` (all tokens) and ``word`` per tokenizer.
+
+    Space-only tokens (a lone ``▁`` in SentencePiece, the space byte in ByT5) are real
+    tokens: they are drawn as grey ``␣`` boxes and counted. The word panel shows the
+    tokens that cover the word itself (see ``TokenizerAdapter.word_pieces``).
+    """
     import matplotlib.pyplot as plt
     from matplotlib.patches import FancyBboxPatch
 
     names = list(adapters)
-    rows = []
+    panels = []  # (pieces, starts_with_space) per tokenizer and panel
     for name in names:
-        for text in (sentence, word):
-            pieces = adapters[name].token_bytes(text if text == sentence else " " + text)
-            rows.append((name, text, [_readable(p) for p in pieces]))
-    char_w = 0.105  # inches per character
-    widths = [sum(max(len(p.strip()), 1) + 0.6 for p in ps) for _, _, ps in rows]
-    fig_w = max(widths) * char_w + 2.2
+        ad = adapters[name]
+        sent = [_readable(p) for p in ad.token_bytes(sentence)]
+        panels.append([(p.strip() or "␣", p.startswith(" ") and bool(p.strip())) for p in sent])
+        panels.append([(p, False) for p in ad.word_pieces(word)])
+
+    def width(label: str) -> float:
+        return max(len(label), 1) + 0.3
+
+    def extent(pieces) -> float:
+        return sum(width(lab) + 0.08 + (0.5 if gap else 0) for lab, gap in pieces)
+
+    span = [max(extent(panels[2 * i + j]) for i in range(len(names))) + 7 for j in range(2)]
     fig, axes = plt.subplots(
         len(names),
         2,
-        figsize=(fig_w, 0.5 * len(names) + 0.9),
-        gridspec_kw={"width_ratios": [3.2, 1.4]},
+        figsize=(sum(span) * 0.105 + 1.5, 0.5 * len(names) + 0.9),
+        gridspec_kw={"width_ratios": span, "wspace": 0.05},
     )
     axes = np.atleast_2d(axes)
     for i, name in enumerate(names):
         for j in range(2):
-            ax = axes[i, j]
-            _, _, pieces = rows[2 * i + j]
+            ax, pieces = axes[i, j], panels[2 * i + j]
             x = 0.0
-            k = 0
-            for p in pieces:
-                if p.startswith(" "):
-                    x += 0.6
-                label = p.strip()
-                if not label:
-                    continue
-                w = max(len(label), 1) + 0.3
+            for k, (label, gap) in enumerate(pieces):
+                x += 0.5 if gap else 0
+                w = width(label)
+                space = label == "␣"
                 ax.add_patch(
                     FancyBboxPatch(
                         (x, 0.1),
                         w,
                         0.8,
                         boxstyle="round,pad=0.02,rounding_size=0.15",
-                        facecolor=OKABE_ITO[k % len(OKABE_ITO)],
-                        alpha=0.55,
+                        facecolor="0.85" if space else OKABE_ITO[k % len(OKABE_ITO)],
+                        alpha=1.0 if space else 0.55,
                         edgecolor="0.3",
                         linewidth=0.5,
                     )
                 )
-                ax.text(x + w / 2, 0.5, label, ha="center", va="center", fontsize=9)
+                ax.text(
+                    x + w / 2,
+                    0.5,
+                    label,
+                    ha="center",
+                    va="center",
+                    fontsize=9,
+                    color="0.4" if space else "black",
+                )
                 x += w + 0.08
-                k += 1
-            ax.set_xlim(-0.2, max(widths) + 1 if j == 0 else max(widths[1::2]) + 1)
+            ax.text(x + 0.4, 0.5, f"{len(pieces)} token", ha="left", va="center", fontsize=9)
+            ax.set_xlim(-0.2, span[j])
             ax.set_ylim(0, 1)
             ax.axis("off")
-            ax.text(
-                -0.3 if j == 0 else ax.get_xlim()[1],
-                0.5,
-                f"{name}  " if j == 0 else f"  {k} token",
-                ha="right" if j == 0 else "left",
-                va="center",
-                fontsize=9,
-                fontweight="bold" if j == 0 else "normal",
-            )
-            if j == 0:
-                ax.text(ax.get_xlim()[1], 0.5, f"  {k} token", ha="left", va="center", fontsize=9)
+        axes[i, 0].text(-0.5, 0.5, name, ha="right", va="center", fontsize=9, fontweight="bold")
     axes[0, 0].set_title(f"«{sentence}»", fontsize=11, loc="left")
     axes[0, 1].set_title(f"«{word}»", fontsize=11, loc="left")
     fig.suptitle("Tokenizatorlar bir xil matnni qanday boʻlaklarga ajratadi", fontsize=12, y=1.02)
     fig.text(
         0.01,
         -0.03,
-        "⟨CA⟩⟨BB⟩ — ʻ belgisining UTF-8 dagi ikki bayti alohida tokenlarga ajralgan.",
+        "⟨CA⟩⟨BB⟩ — ʻ belgisining UTF-8 dagi ikki bayti alohida tokenlarga ajralgan; "
+        "␣ — faqat boʻshliqdan iborat token.",
         fontsize=8,
         color="0.3",
     )
@@ -710,7 +721,7 @@ def plot_morph(overall):
     ax.legend(frameon=False, loc="upper right", fontsize=8)
     fig.text(
         0.01,
-        -0.02,
+        -0.08,
         "100 ta qoʻlda segmentlangan soʻz (QORALAMA, tilshunos tekshiruvi "
         "kutilmoqda). * — oʻzimiz oʻqitgan BPE.",
         fontsize=8,
@@ -745,13 +756,13 @@ def plot_raw_vs_normalized(rvn, kinds: dict[str, str] | None = None):
             fontsize=8,
         )
     ax.axhline(0, color="0.2", linewidth=0.8)
-    ax.set_xticks(x, [t + ("*" if kinds.get(t) == "own" else "") for t in df.tokenizer])
+    ax.set_xticks(x, [_label(r) for r in df.assign(kind=df.tokenizer.map(kinds)).itertuples()])
     ax.set_ylabel("Tokenlar soni oʻzgarishi, %")
     ax.set_title("Apostrofni normallashtirish (' → ʻ / ʼ) tokenlar soniga taʼsiri")
     _comma_axis(ax)
     fig.text(
         0.01,
-        -0.02,
+        -0.08,
         "Musbat: normallashtirilgan matn koʻproq token oladi; manfiy: kamroq. "
         "FLORES-200, 1 000 ta jumla. * — oʻzimiz oʻqitgan BPE.",
         fontsize=8,
