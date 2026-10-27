@@ -57,6 +57,15 @@ U **sun'iy intellektni tushunmoqchi bo'lgan tilshunoslar** va **tilni tushunmoqc
 Istalgan daftarchani oching va **Open in Colab** tugmasini bosing. Birinchi katak kerakli
 kutubxonalarni o'zi o'rnatadi. Kompyuterda ishlatish uchun [README.md](README.md#quick-start) ga qarang.
 
+## Model litsenziyalari
+
+Barcha daftarchalar faqat **ochiq yuklab olinadigan** modellar va tokenizatorlar bilan ishlaydi:
+Hugging Face hisobi, token yoki litsenziyani qabul qilish shart emas. Asosiy toʻplam — Qwen2.5, XLM-R va
+mT5 (taqqoslash uchun GPT-2 va ByT5). Llama va Gemma litsenziyani qabul qilishni talab qiladi, shuning
+uchun ular **ixtiyoriy**: `HF_TOKEN` oʻrnatilgan va litsenziya qabul qilingan boʻlsagina ishlatiladi,
+aks holda daftarcha ularni xabar bilan oʻtkazib yuboradi. Kitobdagi barcha natija va rasmlar ochiq
+modellar asosida olingan.
+
 ## Hissa qo'shish
 
 Lug'atdagi tuzatishlar, yangi o'zbekcha misollar va sheva materiallari juda qadrlanadi.

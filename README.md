@@ -92,6 +92,15 @@ ece(confidence=[0.9, 0.8, 0.6], correct=[1, 0, 1])          # expected calibrati
 4. **Linguistics and engineering together.** Each chapter has a *linguist's view* and an *engineer's view*.
 5. **Open.** Code under MIT, text and data under CC BY 4.0 unless a source licence says otherwise.
 
+## Model licences
+
+Every notebook runs with **openly downloadable models and tokenizers only** — no Hugging Face account,
+token or licence acceptance is needed. The default set is Qwen2.5, XLM-R and mT5 (plus GPT-2 and ByT5 as
+baselines). Llama and Gemma require accepting their licences on Hugging Face, so they are **optional
+extras**: a notebook uses them only if an `HF_TOKEN` is set and the licence was accepted, and otherwise
+skips them with a message. All results and figures in the book come from the open models. Unofficial
+mirrors of gated models are never used.
+
 ## Who is this for
 
 - Linguistics and philology students who want to understand how LLMs work
