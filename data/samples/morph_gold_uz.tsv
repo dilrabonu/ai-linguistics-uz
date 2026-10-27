@@ -1,0 +1,118 @@
+# DRAFT — requires verification by a linguist
+#
+# Uzbek morpheme segmentation gold standard for §4 (Tokenization and morphology).
+# Status: DRAFT. Prepared with an AI assistant on 2026-10-27; NOT yet verified.
+# Rows marked CHECK in the notes are especially uncertain. Do not cite the numbers
+# computed from this file as final until a linguist has signed it off.
+#
+# Format: word<TAB>segmentation<TAB>notes   ('+' separates morphemes)
+# Conventions:
+#   * Segmentation is of the written surface form; alternations stay where they are
+#     written (yurak -> yurag+im, qishloq -> qishlogʻ+i, -lik -> -lig+im).
+#   * Inflection and productive derivation are both segmented; lexicalized forms
+#     (bugun, kechqurun, boshqa) and proper names are one morpheme.
+#   * For homographs one reading is chosen and named in the notes (ishlar, olma).
+#   * Canonical orthography: ʻ U+02BB in oʻ/gʻ, ʼ U+02BC for the tutuq belgisi.
+#   * Notes: [noun]/[verb]/[deriv]/[tricky]/[mono] + Leipzig-style gloss.
+# Licence: CC BY 4.0 (see LICENSE-CONTENT).
+word	segmentation	notes
+kitob	kitob	[mono] root; BPE mini-corpus of the chapter
+kitoblar	kitob+lar	[noun] PL; BPE mini-corpus
+kitobim	kitob+im	[noun] POSS.1SG; BPE mini-corpus
+kitobda	kitob+da	[noun] LOC; BPE mini-corpus
+kitoblarimizdan	kitob+lar+imiz+dan	[noun] PL-POSS.1PL-ABL; main example of the chapter
+kitoblarimizdagilardan	kitob+lar+imiz+da+gi+lar+dan	[noun] PL-POSS.1PL-LOC-ATTR-PL-ABL; prospectus §3 example
+maktablarimizda	maktab+lar+imiz+da	[noun] PL-POSS.1PL-LOC; prospectus question 'maktablarimizda'
+maktabga	maktab+ga	[noun] DAT
+uyimizdagilarga	uy+imiz+da+gi+lar+ga	[noun] POSS.1PL-LOC-ATTR-PL-DAT; prospectus §3 question
+Oʻzbekistonning	Oʻzbekiston+ning	[noun] GEN; proper name not split further (oʻzbek+iston?) CHECK
+poytaxti	poytaxt+i	[noun] POSS.3; example sentence of the chapter
+shahri	shahr+i	[tricky] POSS.3; vowel drop shahar -> shahr- before a vowel suffix
+Toshkentda	Toshkent+da	[noun] LOC
+universitetimizning	universitet+imiz+ning	[noun] POSS.1PL-GEN; loanword stem
+talabalarga	talaba+lar+ga	[noun] PL-DAT
+bolalar	bola+lar	[tricky] PL; -lar is a suffix here (contrast: dollar)
+bolam	bola+m	[noun] POSS.1SG after a vowel
+bolasi	bola+si	[noun] POSS.3 after a vowel
+otam	ota+m	[tricky] 'my father' ota+m (contrast: otim 'my horse')
+otim	ot+im	[tricky] 'my horse' ot+im (contrast: otam)
+qishloqlarda	qishloq+lar+da	[noun] PL-LOC
+qishlogʻi	qishlogʻ+i	[tricky] POSS.3; q -> gʻ alternation before a vowel; boundary placed in the written form
+yuragimda	yurag+im+da	[tricky] POSS.1SG-LOC; k -> g alternation (yurak)
+oʻgʻli	oʻgʻl+i	[tricky] POSS.3; vowel drop oʻgʻil -> oʻgʻl-
+koʻngli	koʻngl+i	[tricky] POSS.3; vowel drop koʻngil -> koʻngl-
+ogʻzi	ogʻz+i	[tricky] POSS.3; vowel drop ogʻiz -> ogʻz-
+togʻlarga	togʻ+lar+ga	[noun] PL-DAT; stem ends in gʻ
+bogʻimiz	bogʻ+imiz	[noun] POSS.1PL; stem ends in gʻ
+gʻoyalarimiz	gʻoya+lar+imiz	[noun] PL-POSS.1PL; stem begins with gʻ
+maʼlumotlar	maʼlumot+lar	[noun] PL; tutuq belgisi in the stem
+taʼlimda	taʼlim+da	[noun] LOC; tutuq belgisi in the stem
+moʻʼjizalar	moʻʼjiza+lar	[noun] PL; oʻ followed by tutuq belgisi
+kompyuterlarda	kompyuter+lar+da	[noun] PL-LOC; loanword stem
+vatanimiz	vatan+imiz	[noun] POSS.1PL
+bizning	biz+ning	[noun] pronoun GEN
+menga	men+ga	[noun] pronoun DAT
+akamnikiga	aka+m+niki+ga	[noun] POSS.1SG-POSSPRON(-niki)-DAT
+toʻgʻrisida	toʻgʻri+si+da	[noun] POSS.3-LOC; postpositional use 'about'
+dollarga	dollar+ga	[tricky] DAT; -lar belongs to the stem
+dollarlar	dollar+lar	[tricky] PL; only the second -lar is a suffix
+lolalar	lola+lar	[tricky] PL; stem contains -la-
+dalada	dala+da	[tricky] LOC; stem dala contains -da- like the LOC suffix
+olmalar	olma+lar	[tricky] 'apples' olma+lar (contrast: olmadi = ol+ma+di)
+ishlar	ish+lar	[tricky] noun reading 'works, affairs'; homograph of verb ish+la+r CHECK
+kelinlar	kelin+lar	[tricky] PL; kelin 'bride' treated as one stem (historically kel+in?) CHECK
+chollar	chol+lar	[noun] PL; stem ends in l -> -llar
+keldim	kel+di+m	[verb] PST-1SG
+keldik	kel+di+k	[verb] PST-1PL
+keldilar	kel+di+lar	[verb] PST-3PL; honorific plural (§9: Dadam keldilar)
+kelmadi	kel+ma+di	[verb] NEG-PST(3SG)
+olmadi	ol+ma+di	[tricky] NEG-PST; 'did not take' (contrast: olmalar)
+kelaman	kel+a+man	[verb] PRS/FUT-1SG
+keladi	kel+a+di	[verb] PRS/FUT-3SG
+oʻqiydi	oʻqi+y+di	[verb] PRS/FUT-3SG; -y after a vowel stem
+kelyapman	kel+yap+man	[verb] PROG-1SG
+oʻqiyapti	oʻqi+yap+ti	[verb] PROG-3SG
+ishlayapti	ish+la+yap+ti	[verb] VBLZ(-la)-PROG-3SG
+kelmoqdamiz	kel+moqda+miz	[verb] PROG(-moqda)-1PL
+oʻqilmoqda	oʻqi+l+moqda	[verb] PASS(-l)-PROG
+borgan	bor+gan	[verb] PTCP.PST
+koʻrmagansiz	koʻr+ma+gan+siz	[verb] NEG-PTCP.PST-2PL
+yozilgan	yoz+il+gan	[verb] PASS-PTCP.PST
+yozildi	yoz+il+di	[verb] PASS-PST
+oʻqitdi	oʻqi+t+di	[verb] CAUS-PST
+koʻrishdik	koʻr+ish+di+k	[verb] RECP-PST-1PL
+kelsak	kel+sa+k	[verb] COND-1PL
+kelib	kel+ib	[verb] CVB(-ib)
+oʻqib	oʻqi+b	[verb] CVB(-b after a vowel)
+kelibdi	kel+ib+di	[verb] evidential past (§11)
+kelgandir	kel+gan+dir	[verb] PTCP.PST-epistemic -dir (§11)
+bormoqchiman	bor+moqchi+man	[verb] INTENT(-moqchi)-1SG
+aytmoqchimisiz	ayt+moqchi+mi+siz	[verb] INTENT-Q-2PL
+kelyapsizmi	kel+yap+siz+mi	[verb] PROG-2PL-Q
+tinglang	tingla+ng	[verb] IMP.2PL; stem tingla- ends in a vowel
+boraylik	bor+ay+lik	[verb] IMP.1PL (-aylik analysed as -ay+lik) CHECK
+chiqmadi	chiq+ma+di	[tricky] NEG-PST; stem chiq- begins like the suffix -chi
+aytishicha	ayt+ish+i+cha	[verb] VN(-ish)-POSS.3-EQU 'according to him/her'
+oʻqish	oʻqi+sh	[verb] VN(-sh after a vowel)
+yozish	yoz+ish	[verb] VN(-ish)
+ishchilar	ish+chi+lar	[deriv] AGENT(-chi)-PL
+oʻqituvchilarimizga	oʻqi+t+uvchi+lar+imiz+ga	[deriv] CAUS-AGENT(-uvchi)-PL-POSS.1PL-DAT
+yozuvchi	yoz+uvchi	[deriv] AGENT(-uvchi)
+kitobxonlik	kitob+xon+lik	[deriv] -xon (reader) + -lik (abstract noun)
+sanʼatkorlar	sanʼat+kor+lar	[deriv] -kor + PL; tutuq belgisi in the stem
+darsliklar	dars+lik+lar	[deriv] -lik + PL
+bolaligimda	bola+lig+im+da	[tricky] -lik -> -lig before a vowel; POSS.1SG-LOC
+baxtsiz	baxt+siz	[deriv] PRIV(-siz)
+bilimli	bil+im+li	[deriv] -im (noun) + -li (adjective) CHECK depth of segmentation
+oʻzbekcha	oʻzbek+cha	[deriv] -cha 'in the manner/language of'
+inglizchadan	ingliz+cha+dan	[deriv] -cha + ABL
+kattaroq	katta+roq	[deriv] COMP(-roq)
+Toshkentlik	Toshkent+lik	[deriv] -lik 'from (a place)'
+dollar	dollar	[mono] -lar is part of the stem, not the plural
+lola	lola	[mono] 'tulip'; looks like it contains -la
+gazeta	gazeta	[mono] loanword; contains -ga- like the DAT suffix
+boshqa	boshqa	[mono] 'other'; historically bosh+qa, lexicalized CHECK
+bugun	bugun	[mono] 'today'; historically bu+gun, lexicalized CHECK
+kechqurun	kechqurun	[mono] 'in the evening'; lexicalized compound CHECK
+kelin	kelin	[mono] 'bride' (see kelinlar)
+ekan	ekan	[mono] evidential auxiliary (§11)
