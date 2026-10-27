@@ -3,16 +3,16 @@ import pytest
 from uzling import apostrophe_profile, normalize_uz, script_of, to_ascii_apostrophe
 from uzling.normalize import APOSTROPHE_VARIANTS, OKINA, TUTUQ
 
-O, T = OKINA, TUTUQ
+K, T = OKINA, TUTUQ
 VARIANTS = ["'", "‘", "’", "`", OKINA, TUTUQ]
 
 
 @pytest.mark.parametrize("variant", VARIANTS)
 def test_okina_variants_unify(variant):
-    assert normalize_uz(f"o{variant}zbek") == f"o{O}zbek"
-    assert normalize_uz(f"O{variant}zbekiston") == f"O{O}zbekiston"
-    assert normalize_uz(f"G{variant}afur") == f"G{O}afur"
-    assert normalize_uz(f"bog{variant}") == f"bog{O}"
+    assert normalize_uz(f"o{variant}zbek") == f"o{K}zbek"
+    assert normalize_uz(f"O{variant}zbekiston") == f"O{K}zbekiston"
+    assert normalize_uz(f"G{variant}afur") == f"G{K}afur"
+    assert normalize_uz(f"bog{variant}") == f"bog{K}"
 
 
 @pytest.mark.parametrize("variant", VARIANTS)
@@ -23,21 +23,21 @@ def test_tutuq_variants_unify(variant):
 @pytest.mark.parametrize(
     "raw,expected",
     [
-        ("O'zbekiston", f"O{O}zbekiston"),
-        ("G'afur", f"G{O}afur"),
-        ("to'g'ri", f"to{O}g{O}ri"),
+        ("O'zbekiston", f"O{K}zbekiston"),
+        ("G'afur", f"G{K}afur"),
+        ("to'g'ri", f"to{K}g{K}ri"),
         ("ma'no", f"ma{T}no"),
         ("san'at", f"san{T}at"),
         ("ta'lim", f"ta{T}lim"),
-        ("mo''jiza", f"mo{O}{T}jiza"),
-        ("mo‘’jiza", f"mo{O}{T}jiza"),
-        ("O'ZBEK", f"O{O}ZBEK"),
-        (f"O{O}ZBEK", f"O{O}ZBEK"),
-        ("O'ZBEKISTON", f"O{O}ZBEKISTON"),
-        ("TO'G'RI", f"TO{O}G{O}RI"),
-        ("tog'", f"tog{O}"),
-        ("go'sht", f"go{O}sht"),
-        ("g'o'za", f"g{O}o{O}za"),
+        ("mo''jiza", f"mo{K}{T}jiza"),
+        ("mo‘’jiza", f"mo{K}{T}jiza"),
+        ("O'ZBEK", f"O{K}ZBEK"),
+        (f"O{K}ZBEK", f"O{K}ZBEK"),
+        ("O'ZBEKISTON", f"O{K}ZBEKISTON"),
+        ("TO'G'RI", f"TO{K}G{K}RI"),
+        ("tog'", f"tog{K}"),
+        ("go'sht", f"go{K}sht"),
+        ("g'o'za", f"g{K}o{K}za"),
         ("aʻlo", f"a{T}lo"),  # okina typed where the tutuq belongs
     ],
 )
@@ -53,8 +53,8 @@ def test_words_without_apostrophes_unchanged(word):
 def test_full_sentence_with_mixed_variants():
     raw = "O`zbekiston ta’limida mo''jiza yo‘q, lekin san'at va g'oyalar to'g`ri yo'lda."
     expected = (
-        f"O{O}zbekiston ta{T}limida mo{O}{T}jiza yo{O}q, lekin san{T}at va "
-        f"g{O}oyalar to{O}g{O}ri yo{O}lda."
+        f"O{K}zbekiston ta{T}limida mo{K}{T}jiza yo{K}q, lekin san{T}at va "
+        f"g{K}oyalar to{K}g{K}ri yo{K}lda."
     )
     assert normalize_uz(raw) == expected
 
