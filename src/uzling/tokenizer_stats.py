@@ -324,7 +324,14 @@ class TokenizerAdapter:
         return spans
 
     def n_word_tokens(self, word: str) -> int:
-        return len(self.word_spans(word))
+        """Number of tokens of ``word`` (tokenized as ``" " + word``).
+
+        Tokens that hold only the leading space are not counted. Unlike
+        :meth:`word_spans`, this also works when the tokenizer normalizes the text
+        (e.g. XLM-R maps ``km²`` to ``km2``), so it is safe for any corpus word.
+        """
+        tokens = self.tok.convert_ids_to_tokens(self.ids(" " + word))
+        return sum(1 for t in tokens if self._token_to_bytes(t).strip())
 
     def word_boundaries(self, word: str) -> set[int]:
         """Token boundaries strictly inside ``word`` as byte offsets."""

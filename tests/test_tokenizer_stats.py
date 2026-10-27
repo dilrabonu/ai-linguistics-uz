@@ -236,6 +236,15 @@ def test_bytelevel_splits_inside_okina():
     assert ad.word_pieces(f"o{OKINA}q") == ["o⟨CA⟩", "⟨BB⟩q"]
 
 
+def test_normalizing_tokenizer():
+    # Like XLM-R/mT5 (NFKC): "²" comes back as "2", so bytes cannot be aligned ...
+    ad = TokenizerAdapter(FakeTok(lambda t: sp_split(t.replace("²", "2"))))
+    with pytest.raises(ValueError):
+        ad.word_spans("km²")
+    # ... but the token count of the word is still available.
+    assert ad.n_word_tokens("km²") == 2  # "▁km", "2"
+
+
 def test_bytes_scheme_every_byte_is_a_token():
     ad = TokenizerAdapter(FakeTok(bytes_split))
     assert ad.n_word_tokens("kitob") == 5
@@ -275,3 +284,21 @@ def test_morph_alignment_with_morpheme_tokenizer():
     assert res["f1"] == 1.0
     res = morph_alignment(ad, ["dollar"])  # d|o|l|lar -> 3 false boundaries
     assert res["fp"] == 3 and res["precision"] == 0.0
+
+
+# ---------------------------------------------------------------- gold file
+
+
+def test_morph_gold_file_is_well_formed():
+    from uzling.ch04 import load_morph_gold, repo_root
+
+    path = repo_root() / "data" / "samples" / "morph_gold_uz.tsv"
+    assert path.read_text(encoding="utf-8").startswith(
+        "# DRAFT — requires verification by a linguist"
+    )
+    rows = load_morph_gold(path)  # raises if a segmentation does not spell its word
+    assert len(rows) == 100
+    assert len({r["word"] for r in rows}) == 100
+    bad = {"'", "`", "\u2018", "\u2019"}
+    assert not any(set(r["word"]) & bad for r in rows)
+    assert {r["category"] for r in rows} == {"noun", "verb", "deriv", "tricky", "mono"}
