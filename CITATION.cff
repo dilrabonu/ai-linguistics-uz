@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use these materials, please cite them as below."
+title: "AI Linguistics for Uzbek: open course materials for \"Sun'iy intellekt lingvistikasi\""
+type: software
+authors:
+  - family-names: Khidirova
+    given-names: Dilrabo
+    affiliation: IT Park University
+    orcid: "https://orcid.org/0009-0009-4983-1503"
+repository-code: "https://github.com/dilrabonu/ai-linguistics-uz"
+license: MIT
+version: 0.1.0
+date-released: "2026-10-27"
+keywords:
+  - Uzbek
+  - low-resource NLP
+  - Turkic languages
+  - large language models
+  - tokenization
+  - calibration
+  - computational linguistics
+  - education

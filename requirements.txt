@@ -1,0 +1,7 @@
+# Runtime + notebook dependencies (Colab already ships most of these).
+numpy>=1.23
+transformers>=4.40
+datasets>=2.19
+matplotlib>=3.7
+pandas>=2.0
+scikit-learn>=1.3

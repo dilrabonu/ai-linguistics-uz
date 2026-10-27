@@ -1,0 +1,23 @@
+term_en,term_uz,definition_uz,chapter,status
+attention,attention (diqqat mexanizmi),Har bir token uchun boshqa tokenlarning ahamiyatini hisoblash,6,proposed
+benchmark,benchmark,Modellarni solishtirish uchun standart test toʻplami,12,proposed
+calibration,kalibrlash,Model ishonchi va haqiqiy toʻgʻrilik mosligi,11,proposed
+cosine similarity,kosinus oʻxshashlik,Ikki vektor yoʻnalishlari yaqinligi oʻlchovi,5,proposed
+cross-lingual transfer,tillararo transfer,Bir tilda oʻrganilgan bilimni boshqa tilda qoʻllash,10,proposed
+data contamination,maʼlumot sizib chiqishi,Test savollarining oʻqitish maʼlumotida boʻlishi,12,proposed
+deduplication,takrorlarni olib tashlash,Korpusdagi bir xil yoki deyarli bir xil matnlarni oʻchirish,8,proposed
+embedding,embedding,Soʻz yoki matnning sonlar ketma-ketligi koʻrinishidagi ifodasi,5,proposed
+evidentiality,evidensiallik,Maʼlumot manbasini grammatik ifodalash,11,proposed
+fertility,fertillik,Bir soʻzga toʻgʻri keladigan oʻrtacha tokenlar soni,4,proposed
+hallucination,gallyutsinatsiya,Modelning asossiz yoki notoʻgʻri maʼlumotni ishonch bilan berishi,11,proposed
+implicature,implikatura,"Bevosita aytilmagan, lekin nazarda tutilgan maʼno",9,proposed
+in-context learning,kontekstda oʻrganish,Promptdagi namunalar asosida vazifani bajarish,7,proposed
+instruction tuning,koʻrsatmaga moslashtirish,Modelni koʻrsatma va javob juftliklarida qoʻshimcha oʻqitish,7,proposed
+inter-annotator agreement,annotatorlar kelishuvi,Turli annotatorlar belgilari mosligi,8,proposed
+language model,til modeli,Matn ketma-ketligi ehtimolini baholovchi model,6,proposed
+model card,model kartasi,"Model maqsadi, maʼlumoti, cheklovlari va xavflari haqidagi hujjat",13,proposed
+perplexity,perplexity,Model matnni bashorat qilishdagi noaniqlik oʻlchovi,6,proposed
+pretraining,oldindan oʻqitish,Katta matnlarda keyingi tokenni bashorat qilib oʻqitish,7,proposed
+retrieval-augmented generation,qidiruv bilan boyitilgan generatsiya,Hujjatlardan topilgan parchalar asosida javob yaratish,14,proposed
+token,token,Model matnni boʻladigan eng kichik birlik,4,proposed
+tokenization,tokenizatsiya,Matnni tokenlarga ajratish jarayoni,4,proposed

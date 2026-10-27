@@ -1,0 +1,15 @@
+name: Notebook or code problem
+description: Something does not run or gives a wrong result
+labels: [bug]
+body:
+  - type: input
+    id: where
+    attributes: { label: Notebook or module, placeholder: "notebooks/04_tokenization_audit.ipynb, cell 7" }
+    validations: { required: true }
+  - type: textarea
+    id: what
+    attributes: { label: What happened, description: Paste the error message if there is one }
+    validations: { required: true }
+  - type: dropdown
+    id: env
+    attributes: { label: Environment, options: [Google Colab, Local (Linux/macOS), Local (Windows), Other] }

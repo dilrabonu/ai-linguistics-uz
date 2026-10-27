@@ -1,0 +1,21 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 Dilrabo Khidirova
+
+Unless stated otherwise, all non-code content in this repository is licensed under
+CC BY 4.0. This covers:
+
+  - notebook text (markdown cells), slides and documentation
+  - glossary/ (English-Uzbek terminology)
+  - datasets created in this project under data/
+
+You are free to share and adapt this material for any purpose, including commercially,
+provided you give appropriate credit, link to the licence, and indicate if changes were made.
+
+Full legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+
+Not covered:
+  - source code (MIT, see LICENSE)
+  - third-party datasets and models, which keep their own licences (see data/DATA_SOURCES.md)
+  - the printed textbook "Sun'iy intellekt lingvistikasi", whose rights are governed by its
+    publishing agreement

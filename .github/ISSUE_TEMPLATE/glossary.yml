@@ -1,0 +1,17 @@
+name: Glossary term / correction
+description: Propose a new English-Uzbek term or correct an existing one
+labels: [glossary]
+body:
+  - type: input
+    id: term_en
+    attributes: { label: English term, placeholder: "attention" }
+    validations: { required: true }
+  - type: input
+    id: term_uz
+    attributes: { label: Proposed Uzbek term, placeholder: "diqqat mexanizmi" }
+    validations: { required: true }
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale and sources
+      description: Why this term? Where is it already used (textbooks, standards, articles)?
