@@ -175,7 +175,7 @@ Five illustrative words (`|` = token boundary; `⟨CA⟩⟨BB⟩` = the two UTF-
 
 ## Limitations and caveats
 
-- **The gold set is a DRAFT** (100 words, one surface-segmentation convention, 9 rows flagged CHECK); every
+- **The gold set is a DRAFT** (100 words, one surface-segmentation convention, 8 rows flagged CHECK); every
   morphology number may change after linguist verification. Segmentation depth (e.g. `bil+im+li`) and the
   placement of alternations (`yurag+im`) are convention-dependent.
 - **FLORES is translated from English** (WikiNews, WikiJunior and WikiVoyage sources); parity on other
