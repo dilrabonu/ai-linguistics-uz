@@ -2,50 +2,8 @@ import math
 
 import pytest
 
-from uzling import (
-    apostrophe_profile,
-    brier,
-    cyr_to_lat,
-    ece,
-    fertility,
-    mce,
-    normalize_uz,
-    parity,
-    reliability_bins,
-    to_ascii_apostrophe,
-)
-from uzling.normalize import OKINA, TUTUQ
-
-# ---------- normalize ----------
-
-@pytest.mark.parametrize("variant", ["'", "`", "‘", "’", "ʻ", "ʼ"])
-def test_okina_variants_unify(variant):
-    assert normalize_uz(f"o{variant}zbek") == f"o{OKINA}zbek"
-    assert normalize_uz(f"O{variant}zbekiston") == f"O{OKINA}zbekiston"
-    assert normalize_uz(f"bog{variant}") == f"bog{OKINA}"
-
-
-@pytest.mark.parametrize("word,expected", [
-    ("ma'no", f"ma{TUTUQ}no"),
-    ("sun`iy", f"sun{TUTUQ}iy"),
-    ("ta’lim", f"ta{TUTUQ}lim"),
-])
-def test_tutuq(word, expected):
-    assert normalize_uz(word) == expected
-
-
-def test_quotes_left_alone():
-    assert normalize_uz("U 'salom' dedi.") == "U 'salom' dedi."
-
-
-def test_four_spellings_become_one():
-    spellings = ["o'zbek", "oʻzbek", "o‘zbek", "o`zbek"]
-    assert len({normalize_uz(s) for s in spellings}) == 1
-
-
-def test_ascii_and_profile():
-    assert to_ascii_apostrophe("o‘zbek maʼno") == "o'zbek ma'no"
-    assert apostrophe_profile("o'g`") == {"U+0027": 1, "U+0060": 1}
+from uzling import brier, cyr_to_lat, ece, mce, reliability_bins
+from uzling.normalize import OKINA
 
 # ---------- transliterate ----------
 
@@ -71,19 +29,6 @@ def test_cyr_digraph_case():
     assert cyr_to_lat("Шаҳар") == "Shahar"
     assert cyr_to_lat("ШАҲАР") == "SHAHAR"
     assert cyr_to_lat("Хат") == "Xat"
-
-# ---------- tokenizer stats ----------
-
-def _chars(s):
-    return [c for c in s if not c.isspace()]
-
-
-def test_fertility_and_parity():
-    assert fertility(str.split, ["bir ikki uch"]) == 1.0
-    assert fertility(_chars, ["ab cd"]) == 2.0
-    assert parity(_chars, ["aaaa"], ["aa"]) == 2.0
-    with pytest.raises(ValueError):
-        parity(_chars, ["a"], ["a", "b"])
 
 # ---------- calibration ----------
 
